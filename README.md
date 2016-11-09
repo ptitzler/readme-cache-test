@@ -1,4 +1,5 @@
-# The images should display the current server time 
+
+# The images should display the current server date/time 
 
 ### Badge image
 
