@@ -21,7 +21,7 @@ const debug = require('debug');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-const hbs = require("hbs");
+const hbs = require('hbs');
 
 /*
  * This application implements a simple Slack slash command back-end service that serves the following requests:
@@ -55,24 +55,22 @@ const hbs = require("hbs");
 		var app = express();
 		app.use(bodyParser.urlencoded({extended: false}));
 		// Set the view engine
-		app.set("view engine", "html");
-		app.engine("html", hbs.__express);
-		app.engine("xml", hbs.__express);
+		app.set('view engine', 'html');
+		app.engine('html', hbs.__express);
+		app.engine('xml', hbs.__express);
 
 		app.use(express.static(path.join(__dirname, 'views')));
 
-		const url = (appEnv.app.application_uris) ? appEnv.app.application_uris[0] : 'localhost:' + appEnv.port;
-
+		//const url = (appEnv.app.application_uris) ? appEnv.app.application_uris[0] : 'localhost:' + appEnv.port;
 
 		//
-		// API endpoint: retrieve monthly ratings summaries for the offering
-		// identified by offeringId one or all offerings
+		// API endpoint: return dynamically generated svg
 		// 
 		//
 		app.get('/test', function(req,res) {
 			console.log('/test');
 			var svgData = {
-      						left: "Bluemix Deployments",
+      						left: 'Bluemix Deployments',
       						right: new Date().toISOString()
     					  };		
     		svgData.leftWidth = svgData.left.length * 6.5 + 10;
@@ -80,10 +78,49 @@ const hbs = require("hbs");
     		svgData.totalWidth = svgData.leftWidth + svgData.rightWidth;
     		svgData.leftX = svgData.leftWidth / 2 + 1;
     		svgData.rightX = svgData.leftWidth + svgData.rightWidth / 2 - 1;
-    		res.set("Content-Type", "image/svg+xml");
-    		res.setHeader('Cache-Control', 'no-cache');
-    		res.header("Expires", 0);
-    		res.render("badge.xml", svgData);
+    		res.set({'Content-Type': 'image/svg+xml',
+    				 'Cache-Control': 'no-cache',
+    				 'Expires': 0});
+    		res.render('badge.xml', svgData);
+		});
+
+		app.get('/badge', function(req,res) {
+			console.log('/badge');
+		    var svgData = {
+		      left: "Bluemix Deployments",
+		      right: new Date().toISOString()
+		    };
+		    svgData.leftWidth = svgData.left.length * 6.5 + 10;
+		    svgData.rightWidth = svgData.right.length * 7.5 + 10;
+		    svgData.totalWidth = svgData.leftWidth + svgData.rightWidth;
+		    svgData.leftX = svgData.leftWidth / 2 + 1;
+		    svgData.rightX = svgData.leftWidth + svgData.rightWidth / 2 - 1;
+		    res.set({"Content-Type": "image/svg+xml",
+		             "Cache-Control": "no-cache",
+		             "Expires": 0});
+		    res.render("badge.xml", svgData);
+		});
+
+
+		app.get('/button', function(req,res) {
+			console.log('/button');
+		    var svgData = {
+		      left: "Deploy to Bluemix",
+		      right: new Date().toISOString()
+		    };
+		    svgData.leftWidth = svgData.left.length * 11 + 20;
+		    svgData.rightWidth = svgData.right.length * 12 + 16;
+		    svgData.totalWidth = svgData.leftWidth + svgData.rightWidth;
+		    svgData.leftX = svgData.leftWidth / 2 + 1;
+		    svgData.rightX = svgData.leftWidth + svgData.rightWidth / 2 - 1;
+		    svgData.leftWidth = svgData.leftWidth + 48;
+		    svgData.totalWidth = svgData.totalWidth + 48;
+		    svgData.leftX = svgData.leftX + 48;
+		    svgData.rightX = svgData.rightX + 48;
+		    res.set({"Content-Type": "image/svg+xml",
+		             "Cache-Control": "no-cache",
+		             "Expires": 0});
+		    res.render("button.xml", svgData);
 		});
 
 		//
