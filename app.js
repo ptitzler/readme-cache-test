@@ -82,6 +82,7 @@ const hbs = require("hbs");
     		svgData.rightX = svgData.leftWidth + svgData.rightWidth / 2 - 1;
     		res.set("Content-Type", "image/svg+xml");
     		res.setHeader('Cache-Control', 'no-cache');
+    		res.header("Expires", 0);
     		res.render("badge.xml", svgData);
 		});
 
