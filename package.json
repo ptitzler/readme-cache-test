@@ -1,0 +1,23 @@
+{
+  "name": "readme-cache-test",
+  "version": "0.0.1",
+  "description": "cache control",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ptitzler/readme-cache-test"
+  },
+  "author": "ptitzler@us.ibm.com",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "hbs": "*",
+    "cfenv": "^1.0.3",
+    "debug": "^2.2.0",
+    "express": "^4.14.0",
+    "path": "^0.12.7"
+  }
+}
