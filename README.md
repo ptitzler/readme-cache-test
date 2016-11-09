@@ -1,4 +1,4 @@
-# The image should display the current time
+# The image should display the current server date/time
 
 ![dynamic image](http://readme-cache-test.mybluemix.net/test/)
 
